@@ -18,7 +18,6 @@ import { ICONS } from '../../../style-icons';
 @Injectable()
 export class StartupService {
   user = {};
-
   constructor(
     iconSrv: NzIconService,
     private menuService: MenuService,
@@ -32,16 +31,15 @@ export class StartupService {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
   }
 
-  private viaHttp(resolve: any, reject: any) {
+  private viaHttp(resolve: any, reject: any, url: any) {
     this.user = {
       id: localStorage.getItem('uid'),
       name: localStorage.getItem('name'),
       avatar: localStorage.getItem('avatar'),
       email: localStorage.getItem('email')
     };
-    console.log(this.user);
     zip(
-      this.httpClient.get('app')
+      this.httpClient.get(url)
     ).pipe(
       // 接收其他拦截器后产生的异常消息
       catchError(([appData]) => {
@@ -71,12 +69,12 @@ export class StartupService {
 // tslint:disable-next-line: no-trailing-whitespace
 
 
-  load(): Promise<any> {
+  load(url: string): Promise<any> {
     // only works with promises
     // https://github.com/angular/angular/issues/15088
     return new Promise((resolve, reject) => {
       // http
-      this.viaHttp(resolve, reject);
+      this.viaHttp(resolve, reject, url);
 
     });
   }

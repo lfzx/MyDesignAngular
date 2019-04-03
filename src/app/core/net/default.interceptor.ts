@@ -104,7 +104,7 @@ export class DefaultInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // 统一加上服务端前缀
     let url = req.url;
-    let name = localStorage.getItem('name');
+    let name = localStorage.getItem('email');
     let uid = localStorage.getItem('uid');
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = environment.SERVER_URL + url;

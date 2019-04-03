@@ -1,30 +1,22 @@
-import { SettingsService, _HttpClient } from '@delon/theme';
-import { Component, OnDestroy, Inject, Optional } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy, Optional, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import {
-  SocialService,
-  SocialOpenType,
-  ITokenService,
-  DA_SERVICE_TOKEN,
-} from '@delon/auth';
+import { NzModalService, NzMessageService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
+import { SettingsService, _HttpClient } from '@delon/theme';
+import { SocialService, DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { ReuseTabService } from '@delon/abc';
 import { StartupService } from '@core';
 
 @Component({
-  selector: 'passport-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less'],
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.less'],
   providers: [SocialService],
 })
-export class UserLoginComponent implements OnDestroy {
+export class AdminLoginComponent implements OnDestroy {
   form: FormGroup;
   error = '';
   type = 0;
-  student = 'student';
-  company = 'company';
-  roles = 'student';
 
   constructor(
     fb: FormBuilder,
@@ -43,9 +35,6 @@ export class UserLoginComponent implements OnDestroy {
     this.form = fb.group({
       userName: [null, [Validators.required,  Validators.email]],
       password: [null, Validators.required],
-      mobile: [null, [Validators.required, Validators.email]],
-      captcha: [null, [Validators.required]],
-      remember: [true],
     });
     modalSrv.closeAll();
   }
@@ -58,22 +47,11 @@ export class UserLoginComponent implements OnDestroy {
   get password() {
     return this.form.controls.password;
   }
-  get mobile() {
-    return this.form.controls.mobile;
-  }
-  get captcha() {
-    return this.form.controls.captcha;
-  }
 
   // #endregion
 
   switch(ret: any) {
     this.type = ret.index;
-  }
-
-  selecltUser(role: any){
-    this.roles = role;
-    console.log(role);
   }
 
   // #region get captcha
@@ -92,47 +70,12 @@ export class UserLoginComponent implements OnDestroy {
       this.password.updateValueAndValidity();
       if (this.userName.invalid || this.password.invalid) return;
     } else {
-      this.mobile.markAsDirty();
-      this.mobile.updateValueAndValidity();
-      this.captcha.markAsDirty();
-      this.captcha.updateValueAndValidity();
-      if (this.mobile.invalid || this.captcha.invalid) return;
     }
 
     // 默认配置中对所有HTTP请求都会强制 [校验](https://ng-alain.com/auth/getting-started) 用户 Token
     // 然一般来说登录请求不需要校验，因此可以在请求URL加上：`/login?_allow_anonymous=true` 表示不触发用户 Token 校验
-    if (this.roles !== 'student') {
       this.http
-      .post('passport/company/login', {
-        email: this.mobile.value,
-        password: this.captcha.value,
-      })
-      .subscribe((res: any) => {
-        if (res.msg !== 'ok') {
-          this.error = res.msg;
-          return;
-        }
-        localStorage.setItem('uid', res.data.id);
-        localStorage.setItem('name', res.data.name);
-        localStorage.setItem('avatar', res.data.avatar);
-        localStorage.setItem('email', res.data.email);
-        localStorage.setItem('appUrl', res.data.appurl);
-        let appUrl = 'companyapp';
-        console.log(localStorage);
-        // 清空路由复用信息
-        this.reuseTabService.clear();
-        // 设置用户Token信息
-        this.tokenService.set({
-          token: res.data.token,
-        });
-        // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
-        this.startupSrv.load(appUrl).then(() => {
-          this.router.navigate(['/']);
-        });
-      });
-    } else {
-      this.http
-      .post('passport/login', {
+      .post('passport/Administrator/login', {
         email: this.userName.value,
         password: this.password.value,
       })
@@ -145,9 +88,7 @@ export class UserLoginComponent implements OnDestroy {
         localStorage.setItem('name', res.data.name);
         localStorage.setItem('avatar', res.data.avatar);
         localStorage.setItem('email', res.data.email);
-        localStorage.setItem('appUrl', res.data.appurl);
-        console.log(localStorage);
-        let appUrl = 'app';
+        const appUrl = 'AdminApp';
         // 清空路由复用信息
         this.reuseTabService.clear();
         // 设置用户Token信息
@@ -159,7 +100,7 @@ export class UserLoginComponent implements OnDestroy {
           this.router.navigate(['/']);
         });
       });
-    }
+
   }
 
   // #endregion
@@ -168,3 +109,4 @@ export class UserLoginComponent implements OnDestroy {
     if (this.interval$) clearInterval(this.interval$);
   }
 }
+
