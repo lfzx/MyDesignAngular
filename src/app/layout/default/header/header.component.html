@@ -1,0 +1,39 @@
+<div class="alain-default__header-logo">
+  <a [routerLink]="['/']" class="alain-default__header-logo-link">
+    <img class="alain-default__header-logo-expanded" src="./assets/logo-full.svg" alt="{{settings.app.name}}" style="max-height:40px;" />
+    <img class="alain-default__header-logo-collapsed" src="./assets/logo.svg" alt="{{settings.app.name}}" style="max-height:30px;" />
+  </a>
+</div>
+<div class="alain-default__nav-wrap">
+  <ul class="alain-default__nav">
+     <!-- Menu -->
+     <li>
+      <div class="alain-default__nav-item" (click)="toggleCollapsedSidebar()">
+        <i nz-icon type="menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
+      </div>
+    </li>
+    <!-- Github Page -->
+    <li>
+      <a class="alain-default__nav-item" href="//github.com/ng-alain/ng-alain" target="_blank">
+        <h2>企业版</h2>
+      </a>
+    </li>
+  </ul>
+  
+  <ul class="alain-default__nav" style="margin-top: 0.5%">
+    <!-- Notify -->
+    <li>
+      <header-notify></header-notify>
+    </li>
+    <nz-divider nzType="vertical"></nz-divider>
+    <!-- Task -->
+    <li class="hidden-mobile">
+      <header-task></header-task>
+    </li>
+    <nz-divider nzType="vertical"></nz-divider>
+    <!-- 个人信息 -->
+    <li class="hidden-mobile">
+      <header-user></header-user>
+    </li>
+  </ul>
+</div>

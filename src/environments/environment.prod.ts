@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  SERVER_URL: `/api/`,
+  production: true,
+  useHash: true,
+  hmr: false,
 };

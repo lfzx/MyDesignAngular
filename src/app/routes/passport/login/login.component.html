@@ -1,0 +1,61 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
+    <nz-tabset [nzAnimated]="false" class="tabs" (nzSelectChange)="switch($event)">
+      <nz-tab [nzTitle]="'学生登录'" (nzClick)="selecltUser(student)">
+        <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" [nzShowIcon]="true" class="mb-lg"></nz-alert>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
+              <input nz-input formControlName="userName" placeholder="email: cipchk@qq.com">
+            </nz-input-group>
+            <nz-form-explain *ngIf="userName.dirty && userName.errors">
+                请输入邮箱!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
+              <input nz-input type="password" formControlName="password" placeholder="password: wodemima">
+            </nz-input-group>
+            <nz-form-explain *ngIf="password.dirty && password.errors">
+                请输入密码!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-tab>
+      
+      <nz-tab [nzTitle]="'企业登录'" (nzClick)="selecltUser(company)">
+        <nz-alert *ngIf="error" [nzType]="'error'" [nzMessage]="error" [nzShowIcon]="true" class="mb-lg"></nz-alert>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
+              <input nz-input formControlName="mobile" placeholder="email: ceshi@qq.com">
+            </nz-input-group>
+            <nz-form-explain *ngIf="mobile.dirty && mobile.errors">
+                请输入邮箱!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+                <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
+                  <input nz-input type="password" formControlName="captcha" placeholder="password: wodemima">
+                </nz-input-group>
+                <nz-form-explain *ngIf="captcha.dirty && captcha.errors">
+                    请输入密码!
+                  </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-tab>
+    </nz-tabset>
+
+    <nz-form-item>
+      <button nz-button type="submit" nzType="primary" nzSize="large" [nzLoading]="http.loading" nzBlock>
+       登录
+      </button>
+    </nz-form-item>
+  </form>
+  <div class="other">
+    <a class="register" routerLink="/passport/register">注册账户</a>
+  </div>
+  

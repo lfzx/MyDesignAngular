@@ -1,0 +1,89 @@
+@import '~@delon/theme/styles/default';
+
+:host {
+  ::ng-deep {
+    .container {
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 377px;
+        line-height: 20px;
+        background-color: rgba(0, 179, 138, 1);
+        text-align: center;
+        border: 1px solid rgba(187, 187, 187, 1);
+    }
+
+    .design{
+      margin-left: 25%;
+      margin-top: 10%;
+      width: 699px;
+      height: 390px;
+      line-height: 20px;
+      border-radius: 5px;
+      text-align: center;
+      background-color: white;
+      border: 1px solid rgba(187, 187, 187, 1);
+    }
+    .langs {
+      text-align: right;
+      width: 100%;
+      height: 40px;
+      line-height: 44px;
+      .anticon {
+        margin-top: 24px;
+        margin-right: 24px;
+        font-size: 14px;
+        vertical-align: top;
+        cursor: pointer;
+      }
+    }
+    .wrap {
+      padding: 32px 0;
+      flex: 1;
+    }
+    .ant-form-item {
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: @screen-md-min) {
+      .container {
+        background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
+        background-repeat: no-repeat;
+        background-position: center 110px;
+        background-size: 100%;
+      }
+      .wrap {
+        padding: 32px 0 24px;
+      }
+    }
+    .top {
+      text-align: center;
+    }
+    .header {
+      height: 44px;
+      line-height: 44px;
+      a {
+        text-decoration: none;
+      }
+    }
+    .logo {
+      height: 44px;
+      margin-right: 16px;
+    }
+    .title {
+      font-size: 33px;
+      color: @heading-color;
+      font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      position: relative;
+      vertical-align: middle;
+    }
+    .desc {
+      font-size: @font-size-base;
+      color: @text-color-secondary;
+      margin-top: 12px;
+      margin-bottom: 40px;
+    }
+   
+  }
+}
