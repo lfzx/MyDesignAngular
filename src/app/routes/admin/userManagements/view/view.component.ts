@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
-import { _HttpClient } from '@delon/theme';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-userManagements-view',
@@ -13,11 +13,11 @@ export class AdminUserManagementsViewComponent implements OnInit {
   constructor(
     private modal: NzModalRef,
     public msgSrv: NzMessageService,
-    public http: _HttpClient
+    public http: HttpClient
   ) { }
 
   ngOnInit(): void {
-    this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
+    this.http.get(`passport/${this.record.id}`).subscribe(res => this.i = res);
   }
 
   close() {

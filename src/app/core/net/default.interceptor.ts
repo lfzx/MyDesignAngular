@@ -75,7 +75,7 @@ export class DefaultInterceptor implements HttpInterceptor {
                 return throwError({});
             } else {
                 // 重新修改 `body` 内容为 `response` 内容，对于绝大多数场景已经无须再关心业务状态码
-                return of(new HttpResponse(Object.assign(event, { body: body.data })));
+                return of(new HttpResponse(Object.assign(event, { body: body.list })));
                 // 或者依然保持完整的格式
                 // return of(event);
             }

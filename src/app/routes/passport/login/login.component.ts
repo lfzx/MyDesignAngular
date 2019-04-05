@@ -73,7 +73,6 @@ export class UserLoginComponent implements OnDestroy {
 
   selecltUser(role: any){
     this.roles = role;
-    console.log(role);
   }
 
   // #region get captcha
@@ -112,21 +111,21 @@ export class UserLoginComponent implements OnDestroy {
           this.error = res.msg;
           return;
         }
-        localStorage.setItem('uid', res.data.id);
-        localStorage.setItem('name', res.data.name);
-        localStorage.setItem('avatar', res.data.avatar);
-        localStorage.setItem('email', res.data.email);
-        localStorage.setItem('appUrl', res.data.appurl);
-        let appUrl = 'companyapp';
-        console.log(localStorage);
+        localStorage.setItem('uid', res.list.id);
+        localStorage.setItem('name', res.list.name);
+        localStorage.setItem('avatar', res.list.avatar);
+        localStorage.setItem('email', res.list.email);
+        localStorage.setItem('appUrl', res.list.appurl);
+        localStorage.setItem('roleid', res.list.roleid);
+        localStorage.setItem('appurl', 'companyapp');
         // 清空路由复用信息
         this.reuseTabService.clear();
         // 设置用户Token信息
         this.tokenService.set({
-          token: res.data.token,
+          token: res.list.token,
         });
         // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
-        this.startupSrv.load(appUrl).then(() => {
+        this.startupSrv.load().then(() => {
           this.router.navigate(['/']);
         });
       });
@@ -141,21 +140,20 @@ export class UserLoginComponent implements OnDestroy {
           this.error = res.msg;
           return;
         }
-        localStorage.setItem('uid', res.data.id);
-        localStorage.setItem('name', res.data.name);
-        localStorage.setItem('avatar', res.data.avatar);
-        localStorage.setItem('email', res.data.email);
-        localStorage.setItem('appUrl', res.data.appurl);
-        console.log(localStorage);
-        let appUrl = 'app';
+        localStorage.setItem('uid', res.list.id);
+        localStorage.setItem('name', res.list.name);
+        localStorage.setItem('avatar', res.list.avatar);
+        localStorage.setItem('email', res.list.email);
+        localStorage.setItem('roleid', res.list.roleid);
+        localStorage.setItem('appurl', 'app');
         // 清空路由复用信息
         this.reuseTabService.clear();
         // 设置用户Token信息
         this.tokenService.set({
-          token: res.data.token,
+          token: res.list.token,
         });
         // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
-        this.startupSrv.load(appUrl).then(() => {
+        this.startupSrv.load().then(() => {
           this.router.navigate(['/']);
         });
       });

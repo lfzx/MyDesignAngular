@@ -8,6 +8,9 @@ import { SFSchema } from '@delon/form';
   templateUrl: './company-managements.component.html',
 })
 export class AdminListCompanyManagementsComponent implements OnInit {
+  // url = `https://localhost:5001/api/passport/company`;
+  // url = `https://localhost:5001/api/passport`;
+
   url = `/user`;
   searchSchema: SFSchema = {
     properties: {

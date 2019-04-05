@@ -4,6 +4,7 @@ import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 
 @Component({
+// tslint:disable-next-line: component-selector
   selector: 'app-admin-userManagements-edit',
   templateUrl: './edit.component.html',
 })

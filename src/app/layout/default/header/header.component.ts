@@ -9,6 +9,8 @@ import { SettingsService } from '@delon/theme';
 export class HeaderComponent {
   searchToggleStatus: boolean;
 
+  role = +localStorage.getItem('roleid');
+
   constructor(public settings: SettingsService) { }
 
   toggleCollapsedSidebar() {

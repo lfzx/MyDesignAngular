@@ -24,6 +24,16 @@
       </nz-form-item>
     </nz-tab>
     </nz-tabset>
+
+    <nz-form-item>
+        <nz-col [nzSpan]="6">
+          <label nz-checkbox formControlName="remember">自动登录</label>
+        </nz-col>
+        <nz-col [nzSpan]="18" class="text-right">
+          <a class="forgot" (click)="msg.error('暂时还未做')">忘记密码</a>
+        </nz-col>
+      </nz-form-item>
+
   <nz-form-item>
     <button nz-button type="submit" nzType="primary" nzSize="large" [nzLoading]="http.loading" nzBlock>
      登录

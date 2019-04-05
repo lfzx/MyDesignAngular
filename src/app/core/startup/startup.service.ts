@@ -31,7 +31,7 @@ export class StartupService {
     iconSrv.addIcon(...ICONS_AUTO, ...ICONS);
   }
 
-  private viaHttp(resolve: any, reject: any, url: any) {
+  private viaHttp(resolve: any, reject: any) {
     this.user = {
       id: localStorage.getItem('uid'),
       name: localStorage.getItem('name'),
@@ -39,7 +39,7 @@ export class StartupService {
       email: localStorage.getItem('email')
     };
     zip(
-      this.httpClient.get(url)
+      this.httpClient.get(localStorage.getItem('appurl'))
     ).pipe(
       // 接收其他拦截器后产生的异常消息
       catchError(([appData]) => {
@@ -50,16 +50,15 @@ export class StartupService {
       // application data
       const res: any = appData;
       // 应用信息：包括站点名、描述、年份
-      this.settingService.setApp(res.data.project);
+      this.settingService.setApp(res.list.project);
       // 用户信息：包括姓名、头像、邮箱地址
       this.settingService.setUser(this.user);
       // ACL：设置权限为全量
       this.aclService.setFull(true);
       // 初始化菜单
-      console.log(res.data.menu);
-      this.menuService.add(res.data.menu);
+      this.menuService.add(res.list.menu);
       // 设置页面标题的后缀
-      this.titleService.suffix = res.data.project.name;
+      this.titleService.suffix = res.list.project.name;
     },
     () => { },
     () => {
@@ -69,12 +68,12 @@ export class StartupService {
 // tslint:disable-next-line: no-trailing-whitespace
 
 
-  load(url: string): Promise<any> {
+  load(): Promise<any> {
     // only works with promises
     // https://github.com/angular/angular/issues/15088
     return new Promise((resolve, reject) => {
       // http
-      this.viaHttp(resolve, reject, url);
+      this.viaHttp(resolve, reject);
 
     });
   }

@@ -2,32 +2,32 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
+import { AdminUserManagementsEditComponent } from '../../userManagements/edit/edit.component';
 
 @Component({
   selector: 'app-admin-list-user-managements',
   templateUrl: './user-managements.component.html',
 })
 export class AdminListUserManagementsComponent implements OnInit {
-  url = `/user`;
+  url = `https://localhost:5001/api/passport`;
   searchSchema: SFSchema = {
     properties: {
-      no: {
+      name: {
         type: 'string',
-        title: '编号'
+        title: '用户名'
       }
     }
   };
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
-    { title: '编号', index: 'no' },
-    { title: '调用次数', type: 'number', index: 'callNo' },
+    { title: '用户名', index: 'name' },
     { title: '头像', type: 'img', width: '50px', index: 'avatar' },
-    { title: '时间', type: 'date', index: 'updatedAt' },
+    { title: '更新时间', type: 'date', index: 'updateTime' },
     {
-      title: '',
+      title: '操作',
       buttons: [
-        // { text: '查看', click: (item: any) => `/form/${item.id}` },
-        // { text: '编辑', type: 'static', component: FormEditComponent, click: 'reload' },
+        { text: '查看', click: (item: any) => `/admin/form/${item.id}` },
+        { text: '编辑', component: AdminUserManagementsEditComponent, click: 'reload' },
       ]
     }
   ];

@@ -7,20 +7,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // passport pages
 import { UserLoginComponent } from './passport/login/login.component';
 import { UserRegisterComponent } from './passport/register/register.component';
-import { UserRegisterResultComponent } from './passport/register-result/register-result.component';
 import {AdminLoginComponent} from './passport/admin-login/admin-login.component';
 // single pages
 import { CallbackComponent } from './callback/callback.component';
 import { UserLockComponent } from './passport/lock/lock.component';
 import { SchoolComponent } from './school/school.component';
 import { BaseComponent } from './base/base.component';
+import { Step1Component } from './passport/register/step1.component';
+import { Step2Component } from './passport/register/step2.component';
+import { Step3Component } from './passport/register/step3.component';
 
 const COMPONENTS = [
   DashboardComponent,
   // passport pages
   UserLoginComponent,
   UserRegisterComponent,
-  UserRegisterResultComponent,
   AdminLoginComponent,
   // single pages
   CallbackComponent,
@@ -34,7 +35,10 @@ const COMPONENTS_NOROUNT = [];
     ...COMPONENTS,
     ...COMPONENTS_NOROUNT,
     SchoolComponent,
-    BaseComponent
+    BaseComponent,
+    Step1Component,
+    Step2Component,
+    Step3Component
     ],
   entryComponents: COMPONENTS_NOROUNT
 })
