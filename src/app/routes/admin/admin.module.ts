@@ -11,9 +11,6 @@ const COMPONENTS = [
   AdminListUserManagementsComponent,
   AdminListCompanyManagementsComponent,
   AdminListCompaniesUnconfirmedComponent];
-const COMPONENTS_NOROUNT = [
-  AdminUserManagementsEditComponent,
-  AdminUserManagementsViewComponent];
 
 @NgModule({
   imports: [
@@ -22,8 +19,6 @@ const COMPONENTS_NOROUNT = [
   ],
   declarations: [
     ...COMPONENTS,
-    ...COMPONENTS_NOROUNT
   ],
-  entryComponents: COMPONENTS_NOROUNT
 })
 export class AdminModule { }
