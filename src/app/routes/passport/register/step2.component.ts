@@ -57,10 +57,9 @@ export class Step2Component implements OnInit {
     setTimeout(() => {
       this.loading = false;
       console.log(this.item);
-      // this.http.post('passport/company/register', this.item).subscribe(() => {
-      //   ++this.item.step;
-      // });
-      ++this.item.step;
+      this.http.post('passport/company/register', this.item).subscribe(() => {
+        ++this.item.step;
+      });
     }, 1000 * 2);
   }
 

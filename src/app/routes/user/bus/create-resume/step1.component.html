@@ -1,0 +1,14 @@
+<page-header [action]="phActionTpl" title="创建简历">
+  <ng-template #phActionTpl>
+    <button routerLink="./" nz-button nzType="primary">返回</button>
+  </ng-template>
+</page-header>
+
+<nz-steps [(nzCurrent)]="item.step">
+    <nz-step nzTitle="基本信息"></nz-step>
+    <nz-step nzTitle="教育经历"></nz-step>
+    <nz-step nzTitle="求职意向"></nz-step>
+  </nz-steps>
+  <app-step2 *ngIf="item.step==0"></app-step2>
+  <app-step3 *ngIf="item.step==1"></app-step3>
+  <app-step4 *ngIf="item.step==2"></app-step4>

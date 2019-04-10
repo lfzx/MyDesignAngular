@@ -6,9 +6,9 @@ import { CompanyBusPostsComponent } from './bus/posts/posts.component';
 
 const routes: Routes = [
 
-  { path: 'employeeRecommendations', component: CompanyListEmployeeRecommendationsComponent },
-  { path: 'deliveries', component: CompanyListDeliveriesComponent },
-  { path: 'posts', component: CompanyBusPostsComponent }];
+  { path: 'company/employeeRecommendations', component: CompanyListEmployeeRecommendationsComponent },
+  { path: 'company/deliveries', component: CompanyListDeliveriesComponent },
+  { path: 'company/posts', component: CompanyBusPostsComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

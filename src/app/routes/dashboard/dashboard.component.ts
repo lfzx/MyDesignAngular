@@ -1,9 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
-import { STColumn } from '@delon/abc';
-import { NzMessageService } from 'ng-zorro-antd';
-import { getTimeDistance } from '@delon/util';
-import { yuan } from '@shared';
+import { HttpClient } from '@angular/common/http';
+
+declare const echarts: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -11,106 +10,235 @@ import { yuan } from '@shared';
   styleUrls: ['./dashboard.component.less'],
 })
 export class DashboardComponent implements OnInit {
-  data: any = {};
-  loading = true;
-  date_range: Date[] = [];
-  rankingListData: any[] = Array(7)
-    .fill({})
-    .map((item, i) => {
-      return {
-        title: '测试', i,
-        total: 323234,
-      };
-    });
-  titleMap = {
-    y1: '交通',
-    y2: '支付',
-  };
-  searchColumn: STColumn[] = [
-    { title: '排名', i18n: 'app.analysis.table.rank', index: 'index' },
-    {
-      title: '搜索关键词',
-      i18n: 'app.analysis.table.search-keyword',
-      index: 'keyword',
-      click: (item: any) => this.msg.success(item.keyword),
-    },
-    {
-      type: 'number',
-      title: '用户数',
-      i18n: 'app.analysis.table.users',
-      index: 'count',
-      sorter: (a, b) => a.count - b.count,
-    },
-    {
-      type: 'number',
-      title: '周涨幅',
-      i18n: 'app.analysis.table.weekly-range',
-      index: 'range',
-      render: 'range',
-      sorter: (a, b) => a.range - b.range,
-    },
-  ];
 
-  constructor(
-    private http: _HttpClient,
-    public msg: NzMessageService,
-    private cdr: ChangeDetectorRef,
-  ) {}
+  optionsFirst: {};
+  optionsSecond: {};
+
+  constructor(private http: HttpClient) {
+  }
+
 
   ngOnInit() {
-    this.http.get('/chart').subscribe((res: any) => {
-      res.offlineData.forEach((item: any, idx: number) => {
-        item.show = idx === 0;
-        item.chart = Object.assign([], res.offlineChartData);
-      });
-      this.data = res;
-      this.loading = false;
-      this.changeSaleType();
-    });
+    this.testPie();
   }
 
-  setDate(type: any) {
-    this.date_range = getTimeDistance(type);
-    setTimeout(() => this.cdr.detectChanges());
-  }
+  testPie(){
+    this.optionsFirst = {
+      backgroundColor: new echarts.graphic['RadialGradient'](0.3, 0.3, 0.8, [{
+        offset: 0,
+        color: '#f7f8fa'
+      }, {
+        offset: 1,
+        color: '#cdd0d5'
+      }]),
 
-  salesType = 'all';
-  salesPieData: any;
-  salesTotal = 0;
-  changeSaleType() {
-    this.salesPieData =
-      this.salesType === 'all'
-        ? this.data.salesTypeData
-        : this.salesType === 'online'
-        ? this.data.salesTypeDataOnline
-        : this.data.salesTypeDataOffline;
-    if (this.salesPieData) {
-      this.salesTotal = this.salesPieData.reduce((pre, now) => now.y + pre, 0);
-    }
-    this.cdr.detectChanges();
-  }
+      tooltip : {
+        trigger: 'axis'
+      },
 
-  handlePieValueFormat(value: any) {
-    return yuan(value);
-  }
+      xAxis : [
+        {
+          boundaryGap : false,
+          data : ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        }
+      ],
+      yAxis : [
+        {
+          splitLine: {
+            show: false
+          },
+          axisLine: {
+            show: true
+          },
+          splitArea: {
+            show: false
+          },
+          type : 'value',
+          name: '风险指数',
+        }
+      ],
+      dataZoom: [{
+        startValue: '周一'
+      }, {
+        type: 'inside'
+      }],
+      visualMap: {
+        top: 1,
+        right: 10,
+        type: 'piecewise', // continuous连续，piecewise分段
+        inverse: false, // 是否反转
+        align: 'left', // 指定组件中图形（比如小方块）和文字的摆放关系
+        orient: 'horizontal', // 水平（'horizontal'）或者竖直（'vertical'）
+        itemGap: 20, // 两个图元之间的间隔距离
+        controller: {
+          outOfRange: {
+            symbol: 'rect',
+          }
+        },
+        textGap: 5,
+        formatter: function(value) {
+          if (value < 20) {
+            return '五级预警(2.0)'; // 范围标签显示内容
+          }
+          if (value < 30) {
+            return '四级预警(4.0)';
+          }
+          if (value < 40) {
+            return '三级预警(6.0)';
+          }
+          if (value < 50) {
+            return '二级预警(8.0)';
+          } else {
+            return '一级预警(10.0)';
+          }
+        },
+        textStyle: {
+          color: '#94969c',
+          fontStyle: 'normal',
+          fontFamily: '微软雅黑',
+          fontSize: 24,
+        },
+        itemWidth: 20,
+        itemHeight: 16,
+        pieces: [{
+          gt: 0,
+          lte: 20,
+          color: '#0084ff',
+        }, {
+          gt: 20,
+          lte: 30,
+          color: '#824ae4'
+        }, {
+          gt: 30,
+          lte: 40,
+          color: '#ff2ad9'
+        }, {
+          gt: 40,
+          lte: 50,
+          color: '#ef0e55'
+        }, {
+          gt: 50,
+          color: '#d70000'
+        }],
+        outOfRange: {
+          color: '#00d67f'
+        },
+      },
+      series : [
+        {
+          name: '预警',
+          type: 'line',
+          stack: '总量',
+          areaStyle: { // 区域填充样式。
+            normal: {
+              opacity: 0.5,
+              pieces: [{
+                gt: 0,
+                lte: 20,
+                color: '#0084ff',
+              }, {
+                gt: 20,
+                lte: 30,
+                color: '#824ae4'
+              }, {
+                gt: 30,
+                lte: 40,
+                color: '#ff2ad9'
+              }, {
+                gt: 40,
+                lte: 50,
+                color: '#ef0e55'
+              }, {
+                gt: 50,
+                color: '#d70000'
+              }],
+              outOfRange: {
+                color: '#00d67f'
+              },
+            }
+          },
+          data: [10, 20, 13, 45, 25, 37, 60]
+        }
+      ]
+    };
 
-  saleTabs: any[] = [
-    { key: 'sales', show: true },
-    { key: 'visits' },
-  ];
-  salesChange(idx: number) {
-    if (this.saleTabs[idx].show !== true) {
-      this.saleTabs[idx].show = true;
-      this.cdr.detectChanges();
-    }
-  }
+    this.optionsSecond = {
+      grid: [{
+        y: '50%',
+        width: '90%',
+        height: '45%'
+      } ],
+      tooltip : {
+        trigger: 'axis',
+        formatter: '{b}<br> {a}: {c}'
+      },
+      legend: {
+        x: '55%',
+        data: ['2018-01-04', '2018-01-05', '2018-01-06', '2018-01-07']
+      },
+      xAxis: {
+        data: ['2018-01-04', '2018-01-05', '2018-01-06', '2018-01-07']
+      },
+      yAxis: {name: '次数'},
+      series: [
+        {
+          name: '告警次数',
+          type: 'bar',
+          barWidth: '45%',
+          barGap: '-100%',
+          data: [5, 20, 15, 10, ],
+          itemStyle: {
+            normal: {
+              color: '#005fa6'
+            }
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              formatter: '{a}: {c}次'
+            }
+          },
+        },
+        {
+          name: '',
+          type: 'bar',
+          barWidth: '45%',
+          data: [4, 19, 14, 9],
+          itemStyle: {
+            normal: {
+              color: '#dbf0fc'
+            },
+            emphasis: {
+              color: '#dbf0fc'
+            }
+          }
+        },
+        {
+          name: '告警',
+          type: 'pie',
+          tooltip : {
+            formatter: '{b}<br> {a}: {c}'
+          },
+          radius : '40%',
+          center: ['25%', '24%'],
+          data: [
+            {value: 5, name: '2018-01-04', itemStyle: {color: '#86c9f4'}},
+            {value: 20, name: '2018-01-05', itemStyle: {color: '#005fa6'}},
+            {value: 15, name: '2018-01-06', itemStyle: {color: '#3a91d2'}},
+            {value: 10, name: '2018-01-07', itemStyle: {color: '#4da8ec'}},
+          ],
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
 
-  offlineIdx = 0;
-  offlineChange(idx: number) {
-    if (this.data.offlineData[idx].show !== true) {
-      this.data.offlineData[idx].show = true;
-      this.cdr.detectChanges();
-    }
   }
 
 }

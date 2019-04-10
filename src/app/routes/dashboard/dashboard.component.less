@@ -1,103 +1,52 @@
-@import '~@delon/theme/styles/default';
 :host ::ng-deep {
-  .icon-group {
-    i {
-      transition: color 0.32s;
-      color: @text-color-secondary;
-      cursor: pointer;
-      margin-left: 16px;
-      &:hover {
-        color: @text-color;
-      }
+  .map-chart {
+    padding-top: 24px;
+    height: 457px;
+    text-align: center;
+    img {
+      display: inline-block;
+      max-width: 100%;
+      max-height: 437px;
     }
   }
-  .rank-list {
-    margin: 25px 0 0;
-    padding: 0;
-    list-style: none;
-    li {
-      .clearfix();
-      margin-top: 16px;
-      display: flex;
-      align-items: center;
-      span {
-        color: @text-color;
-        font-size: 14px;
-        line-height: 22px;
+  .pie-card {
+    .pie-stat {
+      font-size: 24px !important;
+    }
+  }
+  .active-chart {
+    position: relative;
+    g2-mini-area {
+      margin-top: 32px;
+    }
+    .active-grid {
+      p {
+        position: absolute;
+        top: 80px;
       }
-      .number {
-        background-color: @background-color-base;
-        border-radius: 20px;
+      p:last-child {
+        top: 115px;
+      }
+    }
+    .active-legend {
+      position: relative;
+      font-size: 0;
+      margin-top: 8px;
+      height: 20px;
+      line-height: 20px;
+      span {
         display: inline-block;
         font-size: 12px;
-        font-weight: 600;
-        margin-right: 16px;
-        height: 20px;
-        line-height: 20px;
-        width: 20px;
         text-align: center;
-        margin-top: 1.5px;
-        &.active {
-          background-color: #314659;
-          color: #fff;
-        }
+        width: 25%;
       }
-      .title {
-        flex: 1;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        margin-right: 8px;
+      span:first-child {
+        text-align: left;
+      }
+      span:last-child {
+        text-align: right;
       }
     }
-  }
-  .sales-extra {
-    display: inline-block;
-    margin-right: 24px;
-    a {
-      color: @text-color;
-      margin-left: 24px;
-      &:hover {
-        color: @primary-color;
-      }
-      &.currentDate {
-        color: @primary-color;
-      }
-    }
-  }
-  .sales-card {
-    .bar {
-      padding: 0 0 32px 32px;
-    }
-    .rank {
-      padding: 0 32px 32px 72px;
-    }
-    .ant-tabs-bar {
-      padding-left: 16px;
-      .ant-tabs-nav .ant-tabs-tab {
-        padding-top: 16px;
-        padding-bottom: 14px;
-        line-height: 24px;
-      }
-    }
-    .ant-tabs-extra-content {
-      padding-right: 24px;
-      line-height: 55px;
-    }
-    .ant-card-head {
-      position: relative;
-    }
-    .ant-card-head-title {
-      align-items: normal;
-    }
-  }
-  .sales-card-extra {
-    height: inherit;
-  }
-  .sales-type-radio {
-    position: absolute;
-    right: 54px;
-    bottom: 12px;
   }
   .offline-card {
     .ant-tabs-ink-bar {
@@ -118,54 +67,34 @@
       position: relative;
       right: 6px;
     }
-    .ant-tabs-tab-active h4 {
-      color: @primary-color;
+  }
+  .sales-card {
+    .bar {
+      padding: 0 0 32px 32px;
+    }
+    .rank {
+      padding: 0 32px 32px 72px;
+    }
+    .ant-tabs-tab {
+      padding-top: 16px;
+      padding-bottom: 14px;
+      line-height: 24px;
+    }
+    .ant-tabs-extra-content {
+      padding-right: 24px;
+      line-height: 55px;
+    }
+    .ant-card-head {
+      position: relative;
     }
   }
-  .trend-text {
-    margin-left: 8px;
-    color: @heading-color;
+  .sales-card-extra {
+    height: 85px;
   }
-
-  @media screen and (max-width: @screen-lg) {
-    .sales-extra {
-      display: none;
-    }
-    .rank-list {
-      li {
-        span:first-child {
-          margin-right: 8px;
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: @screen-md) {
-    .rank-title {
-      margin-top: 16px;
-    }
-    .sales-card .bar {
-      padding: 16px;
-    }
-  }
-
-  @media screen and (max-width: @screen-sm) {
-    .sales-extra-wrap {
-      display: none;
-    }
-    .sales-card {
-      .ant-tabs-content {
-        padding-top: 30px;
-      }
-    }
+  .sales-type-radio {
+    position: absolute;
+    left: 24px;
+    bottom: 15px;
   }
 
-  // fix pagination bottom
-  .ant-table-pagination {
-    margin-bottom: 0;
-  }
-
-  .g2-pie__legend-block .g2-pie__chart {
-    margin: 0;
-  }
 }

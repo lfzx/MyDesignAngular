@@ -145,6 +145,13 @@ export class UserLoginComponent implements OnDestroy {
         localStorage.setItem('avatar', res.list.avatar);
         localStorage.setItem('email', res.list.email);
         localStorage.setItem('roleid', res.list.roleid);
+        localStorage.setItem('resumeid', res.list.resumeid);
+        localStorage.setItem('gender', res.list.gender);
+        localStorage.setItem('school', res.list.school);
+        localStorage.setItem('entranceTime', res.list.entranceTime);
+        localStorage.setItem('graduationTime', res.list.graduationTime);
+        localStorage.setItem('profession', res.list.profession);
+        localStorage.setItem('academic', res.list.academic);
         localStorage.setItem('appurl', 'app');
         // 清空路由复用信息
         this.reuseTabService.clear();

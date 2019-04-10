@@ -8,7 +8,7 @@ import { TransferService } from './transfer.service';
   selector: 'passport-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.less'],
-  providers: [TransferService],
+  providers:[TransferService]
 })
 export class UserRegisterComponent implements AfterViewInit {
   constructor(public item: TransferService) {}

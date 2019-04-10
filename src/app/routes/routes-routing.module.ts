@@ -25,11 +25,11 @@ const routes: Routes = [
     canActivate: [SimpleGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘', titleI18n: 'dashboard' } },
+      { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘'} },
       { path: 'exception', loadChildren: './exception/exception.module#ExceptionModule' },
-      { path: 'user', loadChildren: './user/user.module#UserModule' },
-      { path: 'company', loadChildren: './company/company.module#CompanyModule' },
-      { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
+      { path: '', loadChildren: './user/user.module#UserModule' },
+      { path: '', loadChildren: './company/company.module#CompanyModule' },
+      { path: '', loadChildren: './admin/admin.module#AdminModule' },
       {path: 'base', component: BaseComponent},
       {path: 'school', component: SchoolComponent},
       // 业务子模块

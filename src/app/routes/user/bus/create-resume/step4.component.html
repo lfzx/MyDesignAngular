@@ -1,0 +1,23 @@
+<form nz-form [formGroup]="form" (ngSubmit)="_submitForm()" se-container="1" labelWidth="100">
+  <se label="期望职位" error="请输入期望职位" required>
+    <input nz-input formControlName="resumePostName">
+  </se>
+  <se label="工作性质" error="请选择工作性质">
+      <nz-select formControlName="resumeJobType" style="width: 100%;">
+          <nz-option [nzLabel]="'全职'" [nzValue]="'全职'"></nz-option>
+          <nz-option [nzLabel]="'兼职'" [nzValue]="'兼职'"></nz-option>
+          <nz-option [nzLabel]="'实习'" [nzValue]="'实习'"></nz-option>
+        </nz-select>
+  </se>
+  <se label="期望薪资" error="请输入期望薪资" required>
+    <input nz-input formControlName="resumeSalary">
+  </se>
+  <se label="期望城市">
+    <input nz-input formControlName="resumeWorkPlace">
+  </se>
+  
+  <se>
+      <button nz-button [nzType]="'primary'" [nzLoading]="loading" [disabled]="form.invalid">提交</button>
+      <button nz-button (click)="prev()">上一步</button>
+  </se>
+</form>

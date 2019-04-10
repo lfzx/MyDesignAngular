@@ -6,9 +6,9 @@ import { AdminListCompaniesUnconfirmedComponent } from './list/companies-unconfi
 
 const routes: Routes = [
 
-  { path: 'userManagements', component: AdminListUserManagementsComponent },
-  { path: 'companyManagements', component: AdminListCompanyManagementsComponent },
-  { path: 'companiesUnconfirmed', component: AdminListCompaniesUnconfirmedComponent }];
+  { path: 'admin/userManagements', component: AdminListUserManagementsComponent },
+  { path: 'admin/companyManagements', component: AdminListCompanyManagementsComponent },
+  { path: 'admin/companiesUnconfirmed', component: AdminListCompaniesUnconfirmedComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

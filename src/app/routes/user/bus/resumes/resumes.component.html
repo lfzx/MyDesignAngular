@@ -1,1 +1,129 @@
-<page-header></page-header>
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <div *ngIf='!isShow'>
+    <button routerLink="/user/createResume" nz-button nzType="primary">新建</button></div>
+    <div *ngIf='isShow'>
+        <button (click)="openEdit(resume)" nz-button nzType="primary">编辑</button></div>
+  </ng-template>
+</page-header>
+
+<div *ngIf='isShow'>
+    <nz-card [nzHoverable]="true" [nzBordered]="false">
+        <sv-container size="large" title="基本信息">
+          <sv label="姓名">{{user.name}}</sv>
+          <sv label="出生日期">{{resume.birth}}</sv>
+          <sv label="性别">
+            <span *ngIf="user.gender == 0">
+              <nz-badge nzStatus="error" nzText="女"></nz-badge>
+            </span>
+            <span *ngIf="user.gender == 1">
+              <nz-badge nzStatus="processing" nzText="男"></nz-badge>
+            </span></sv>
+          <sv label="所在城市">{{resume.familyAddress}}</sv>
+          <sv label="手机号码">{{resume.resumeTelephoneNumber}}</sv>
+          <sv label="联系邮箱">{{user.email}}</sv>
+        </sv-container>
+
+        <nz-divider></nz-divider>
+
+        <sv-container size="large" title="教育经历&工作经验">
+          <sv label="学校名称">{{user.school}}</sv>
+          <sv label="入学年份">{{user.entranceTime}}</sv>
+          <sv label="毕业年份">{{user.graduationTime}}</sv>
+          <sv label="学历">{{user.academic}}</sv>
+          <sv label="专业">{{user.profession}}</sv>
+          <sv label="工作经验">{{resume.resumeExperience}}</sv>
+          <sv label="技能加分">{{resume.skill}}</sv>
+        </sv-container>
+
+        <nz-divider></nz-divider>
+
+        <sv-container size="large" title="求职意向">
+            <sv label="期望职位">{{resume.resumePostName}}</sv>
+            <sv label="职位类型">{{resume.resumeJobType}}</sv>
+            <sv label="期望城市">{{resume.resumeWorkPlace}}</sv>
+            <sv label="薪资">{{resume.resumeSalary}}</sv>
+          </sv-container>
+      
+      </nz-card>
+</div>
+
+
+<!--编辑弹出框-->
+<nz-modal [(nzVisible)]="editIsVisible" nzWidth="800px" nzTitle="编辑简历信息" (nzOnCancel)="onAddOrEditCancel()"   [nzContent]='editModalContent' [nzFooter]='editModalFooter'>
+  
+    <ng-template #editModalContent>
+      <form nz-form [formGroup]="editForm" >
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7" nzFor="birth" >出生日期</nz-form-label>
+          <nz-form-control [nzSpan]="12" nzHasFeedback>
+            <input nz-input id="birth" formControlName="birth" minlength="4" placeholder="19960219">
+          </nz-form-control>
+        </nz-form-item>
+  
+        <nz-form-item>
+          <nz-form-label [nzSpan]="7"  nzFor="familyAddress">现居住地</nz-form-label>
+          <nz-form-control [nzSpan]="12" nzHasFeedback>
+            <input nz-input type="familyAddress" formControlName="familyAddress" id="familyAddress" placeholder="贵州省贵阳市">
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7"  nzFor="resumeTelephoneNumber">联系电话</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback>
+              <input nz-input maxlength="11" formControlName="resumeTelephoneNumber" id="resumeTelephoneNumber" minlength="11">
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+              <nz-form-label [nzSpan]="7"  nzFor="resumeExperience">工作经验</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzHasFeedback>
+                <input nz-input type="resumeExperience" formControlName="resumeExperience" id="resumeExperience">
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7"  nzFor="skill">技能</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback>
+                  <input nz-input type="skill" formControlName="skill" id="skill" placeholder="技能">
+                </nz-form-control>
+              </nz-form-item>
+  
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzFor="resumePostName" >期望职位</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback>
+              <input nz-input type='resumePostName' id="resumePostName" formControlName="resumePostName" placeholder="数据分析师">
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+              <nz-form-label [nzSpan]="7" nzFor="resumeJobType" >职位类型</nz-form-label>
+              <nz-form-control [nzSpan]="12" nzHasFeedback>
+                <input nz-input type='resumeJobType' id="resumeJobType" formControlName="resumeJobType" placeholder="全职">
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSpan]="7" nzFor="resumeWorkPlace" >工作地点</nz-form-label>
+                <nz-form-control [nzSpan]="12" nzHasFeedback>
+                  <input nz-input type='resumeWorkPlace' id="resumeWorkPlace" formControlName="resumeWorkPlace" placeholder="工作地点">
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item>
+                  <nz-form-label [nzSpan]="7" nzFor="resumeSalary" >期望薪资</nz-form-label>
+                  <nz-form-control [nzSpan]="12" nzHasFeedback>
+                    <input nz-input type='resumeSalary' id="resumeSalary" formControlName="resumeSalary" placeholder="期望薪资">
+                  </nz-form-control>
+                </nz-form-item>
+
+      </form>
+    </ng-template>
+  
+    <ng-template #editModalFooter>
+      <button (click)="onAddOrEditCancel()" nz-button nzType="default">取消</button>
+      <button nz-button nzType="primary" type="submit"  [disabled]="!editForm.valid"  (click)="onEditSubmit()">确认</button>
+    </ng-template>
+  
+  </nz-modal>
+
