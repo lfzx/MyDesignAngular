@@ -60,7 +60,7 @@ export class Step2Component implements OnInit {
       this.http.post('passport/company/register', this.item).subscribe(() => {
         ++this.item.step;
       });
-    }, 1000 * 2);
+    }, 300);
   }
 
   prev() {

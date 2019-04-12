@@ -1,18 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TransferService } from './transfer.service';
-import { HttpClient } from '@angular/common/http';
 import { SwalService } from '@core/swal.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { TransferService } from './transfer.service';
 
 @Component({
-  selector: 'app-step4',
-  templateUrl: './step4.component.html',
+  selector: 'app-step3',
+  templateUrl: './step3.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Step4Component implements OnInit {
+export class Step3Component implements OnInit {
 
-  url = 'passport/resume/register';
+  url = 'passport/posts/register';
 
   form: FormGroup;
   loading = false;
@@ -26,10 +26,12 @@ export class Step4Component implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      resumePostName: [null, [Validators.required]],
-      resumeJobType: [null, [Validators.required]],
-      resumeSalary: [null, [Validators.required]],
-      resumeWorkPlace: [null],
+      academicRequirements: [null, [Validators.required]],
+      postExperience: [null, [Validators.required]],
+      postDescription: [null, [Validators.required]],
+      postEmail: [null, [Validators.required,Validators.email]],
+      postTelephoneNumber: [null]
+
     });
     this.form.patchValue(this.item);
   }
@@ -37,17 +39,20 @@ export class Step4Component implements OnInit {
 
 
    //#region get form fields
-  get resumePostName() {
-    return this.form.controls.resumePostName;
+  get academicRequirements() {
+    return this.form.controls.academicRequirements;
   }
-  get resumeJobType() {
-    return this.form.controls.resumeJobType;
+  get postExperience() {
+    return this.form.controls.postExperience;
   }
-  get resumeSalary() {
-    return this.form.controls.resumeSalary;
+  get postDescription() {
+    return this.form.controls.postDescription;
   }
-  get resumeWorkPlace() {
-    return this.form.controls.resumeWorkPlace;
+  get postEmail() {
+    return this.form.controls.postEmail;
+  }
+  get postTelephoneNumber() {
+    return this.form.controls.postTelephoneNumber;
   }
   //#endregion
 
@@ -59,8 +64,7 @@ export class Step4Component implements OnInit {
       this.http.post(this.url, this.item).subscribe((item: any) =>{
         if (item.msg === 'ok') {
           this.msg.success(item.msg + '创建成功！');
-          localStorage.setItem('resumeid', item.list.id);
-          this.router.navigateByUrl(`user/resumes`) ;
+          this.router.navigateByUrl(`company/posts`) ;
         } else {
         this.msg.error('创建失败!' + '/br' + item.msg);
         this.item.step = 0;
@@ -75,5 +79,6 @@ export class Step4Component implements OnInit {
   }
 
 }
+
 
 

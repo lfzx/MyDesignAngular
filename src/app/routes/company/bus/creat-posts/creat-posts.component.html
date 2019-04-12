@@ -1,0 +1,15 @@
+<page-header [action]="phActionTpl" title="创建职位信息">
+    <ng-template #phActionTpl>
+        <button routerLink="/company/posts" nz-button nzType="primary">返回</button>
+      </ng-template>
+</page-header>
+
+<nz-steps [(nzCurrent)]="item.step">
+  <nz-step nzTitle="公司信息"></nz-step>
+  <nz-step nzTitle="职位基本信息"></nz-step>
+  <nz-step nzTitle="职位要求"></nz-step>
+</nz-steps>
+
+<app-step1 *ngIf="item.step==0"></app-step1>
+<app-step2 *ngIf="item.step==1"></app-step2>
+<app-step3 *ngIf="item.step==2"></app-step3>

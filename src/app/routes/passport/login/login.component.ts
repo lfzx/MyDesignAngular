@@ -117,6 +117,9 @@ export class UserLoginComponent implements OnDestroy {
         localStorage.setItem('email', res.list.email);
         localStorage.setItem('appUrl', res.list.appurl);
         localStorage.setItem('roleid', res.list.roleid);
+        localStorage.setItem('code', res.list.organizationCode);
+        localStorage.setItem('description', res.list.companyDescription);
+        localStorage.setItem('url', res.list.companyUrl);
         localStorage.setItem('appurl', 'companyapp');
         // 清空路由复用信息
         this.reuseTabService.clear();

@@ -1,0 +1,15 @@
+<form nz-form [formGroup]="form" (ngSubmit)="_submitForm()" se-container="1" labelWidth="100">
+    <se label="公司名称">{{item.companyName}}</se>
+    <se label="组织机构代码">{{item.organizationCode}}</se>
+    <se label="公司详情">{{item.companyDescription}}</se>
+    <se label="公司网站链接">{{item.companyUrl}}</se>
+
+  <se label="城市" error="请输入城市" required>
+    <input nz-input formControlName="city">
+  </se>
+  
+  <se>
+      <button nz-button nzType="primary" [disabled]="form.invalid">下一步</button>
+      <button nz-button  routerLink="/" [nzType]="'primary'">返回首页</button>
+  </se>
+</form>

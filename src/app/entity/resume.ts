@@ -13,13 +13,4 @@ export class Resume {
   resumeExperience: string;
   skill: string;
   resumeUpdateTime: string;
-  name: string;
-  email: string;
-  updateTime: string;
-  gender: number;
-  academic: string;
-  school: string;
-  entranceTime: string;
-  graduationTime: string;
-  profession: string;
 }

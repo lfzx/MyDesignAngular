@@ -1,7 +1,7 @@
 <page-header [action]="phActionTpl">
   <ng-template #phActionTpl>
-    <div *ngIf='!isShow'>
-    <button routerLink="/user/createResume" nz-button nzType="primary">新建</button></div>
+    <!-- <div *ngIf='!isShow'>
+    <button routerLink="/user/createResume" nz-button nzType="primary">新建</button></div> -->
     <div *ngIf='isShow'>
         <button (click)="openEdit(resume)" nz-button nzType="primary">编辑</button></div>
   </ng-template>
@@ -48,6 +48,22 @@
       </nz-card>
 </div>
 
+<div *ngIf='!isShow'>
+  <nz-empty
+      [nzNotFoundImage]="
+        'https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original'
+      "
+      [nzNotFoundContent]="contentTpl"
+      [nzNotFoundFooter]="footerTpl"
+    >
+      <ng-template #contentTpl>
+        <span>您未创建简历</span>
+      </ng-template>
+      <ng-template #footerTpl>
+        <button nz-button nzType="primary" routerLink="/user/createResume">Create Now</button>
+      </ng-template>
+    </nz-empty>
+</div>
 
 <!--编辑弹出框-->
 <nz-modal [(nzVisible)]="editIsVisible" nzWidth="800px" nzTitle="编辑简历信息" (nzOnCancel)="onAddOrEditCancel()"   [nzContent]='editModalContent' [nzFooter]='editModalFooter'>

@@ -3,7 +3,7 @@
     <input nz-input formControlName="companyName">
   </se>
   <se label="组织机构代码" error="请输入9位公司组织机构代码" required>
-    <input nz-input formControlName="organizationCode">
+    <input nz-input formControlName="organizationCode" minlength="11" maxlength="11">
   </se>
   <se label="公司描述" error="请输入公司描述，至少20字" required>
     <input nz-input formControlName="companyDescription">
