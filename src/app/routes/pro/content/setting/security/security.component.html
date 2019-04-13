@@ -1,0 +1,38 @@
+<nz-list [nzDataSource]="data" nzItemLayout="horizontal">
+  <nz-list-item [nzActions]="[passwordOp]">
+    <ng-template #passwordOp>
+      <a (click)="msg.success('Edit')">修改</a>
+    </ng-template>
+    <nz-list-item-meta nzTitle="账户密码" [nzDescription]="passwordDesc">
+      <ng-template #passwordDesc>
+        当前密码强度：<span class="text-green">强</span>
+      </ng-template>
+    </nz-list-item-meta>
+  </nz-list-item>
+  <nz-list-item [nzActions]="[phoneOp]">
+    <ng-template #phoneOp>
+      <a (click)="msg.success('Edit')">修改</a>
+    </ng-template>
+    <nz-list-item-meta nzTitle="密保手机" [nzDescription]="phoneDesc">
+      <ng-template #phoneDesc>
+        已绑定手机：159****2231
+      </ng-template>
+    </nz-list-item-meta>
+  </nz-list-item>
+  <nz-list-item [nzActions]="[emailOp]">
+    <ng-template #emailOp>
+      <a (click)="msg.success('Edit')">修改</a>
+    </ng-template>
+    <nz-list-item-meta nzTitle="备用邮箱" [nzDescription]="emailDesc">
+      <ng-template #emailDesc>
+        已绑定邮箱：cip*****.com
+      </ng-template>
+    </nz-list-item-meta>
+  </nz-list-item>
+</nz-list>
+
+<div class="list-button">
+<button nz-button nzType="default" style="color: #3ba4b2;font-size: 18px;border:1px solid #313d3d
+">更新基本信息</button>
+</div>
+

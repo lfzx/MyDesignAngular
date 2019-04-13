@@ -12,8 +12,6 @@ import {AdminLoginComponent} from './passport/admin-login/admin-login.component'
 // single pages
 import { CallbackComponent } from './callback/callback.component';
 import { UserLockComponent } from './passport/lock/lock.component';
-import { SchoolComponent } from './school/school.component';
-import { BaseComponent } from './base/base.component';
 import { Step1Component } from './passport/register/step1.component';
 import { Step2Component } from './passport/register/step2.component';
 import { Step3Component } from './passport/register/step3.component';
@@ -39,8 +37,6 @@ const COMPONENTS_NOROUNT = [];
   declarations: [
     ...COMPONENTS,
     ...COMPONENTS_NOROUNT,
-    SchoolComponent,
-    BaseComponent,
     Step1Component,
     Step2Component,
     Step3Component

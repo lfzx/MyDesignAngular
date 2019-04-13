@@ -1,0 +1,69 @@
+<page-header title="投递信息详情">
+  </page-header>
+  
+      <nz-card [nzHoverable]="true" [nzBordered]="false">
+          <sv-container size="large" title="投递信息">
+              <sv label="投递时间" >{{delivery.deliveryUpdateTime | date:'yyyy-MM-dd HH:mm:ss'}}</sv>
+            </sv-container>
+
+            <nz-divider></nz-divider>
+
+          <sv-container size="large" title="简历信息">
+              <sv label="姓名">{{user.name}}</sv>
+              <sv label="期望职位">{{resume.resumePostName}}</sv>
+              <sv label="期望薪资">{{resume.resumeSalary}}</sv>
+              <sv label="工作地点">{{resume.resumeWorkPlace}}</sv>
+              <sv label="工作经验">
+                  <nz-mention>
+                      <textarea
+                        nz-input
+                        [nzAutosize]="{minRows: 4, maxRows: 4}"
+                        [(ngModel)]="resume.resumeExperience"
+                        nzMentionTrigger>
+                       </textarea>
+                       </nz-mention>
+              </sv>
+              <sv label="职位类型">{{resume.resumeJobType}}</sv>
+              <sv label="技能">{{resume.skill}}</sv>
+              <sv label="出生日期">{{resume.birth}}</sv>
+              <sv label="学校-专业-学历">{{user.school}}-{{user.profession}}-{{user.academic}}</sv>
+              <sv label="入学年份-毕业年份">{{user.entranceTime}}-{{user.graduationTime}}</sv>
+              <sv label="邮箱">{{user.email}}</sv>
+              <sv label="联系电话">{{resume.resumeTelephoneNumber}}</sv>
+            </sv-container>
+
+            <nz-divider></nz-divider>
+
+          <sv-container size="large" title="招聘消息">
+              <sv label="职位名称">{{post.postName}}</sv>
+              <sv label="工作地点">{{post.postWorkPlace}}</sv>
+              <sv label="薪资">{{post.postSalary}}</sv>
+              <sv label="职位详情">
+                  <nz-mention>
+                    <textarea
+                      nz-input
+                      [nzAutosize]="{minRows: 4, maxRows: 4}"
+                      [(ngModel)]="post.postDescription"
+                      nzMentionTrigger>
+                     </textarea>
+                     </nz-mention></sv>
+              <sv label="招聘人数">{{post.numberOfRecruits}}</sv>
+              <sv label="工作经验">{{post.postExperience}}</sv>
+              <sv label="职位类型">{{post.postJobType}}</sv>
+            </sv-container>
+  
+            <nz-divider></nz-divider>
+  
+          <sv-container size="large" title="公司信息">
+            <sv label="公司名称">{{company.companyName}}</sv>
+            <sv label="公司网站链接">{{company.companyUrl}}</sv>
+          </sv-container>
+  
+          <div style="float: right;">
+              <button nz-button nzType="primary" (click)="interview()">邀请面试</button>
+              <button nz-button nzType="primary" (click)="return()">返回</button>
+        </div>
+  
+        </nz-card>
+  
+  

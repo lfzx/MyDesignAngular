@@ -169,16 +169,6 @@ export class AdminListUserManagementsComponent implements OnInit {
     });
   }
 
-  // 批量删除数据
-  remove() {
-    // const data = this.users.filter(value => value.checked).map(i => i.id);
-    // this.client.delete(this.url).subscribe(() => {
-    //   this.getUsers();
-    //   this.clearCheck();
-    // });
-  }
-
-
   // 通过name查询
   searchUseByrName(): void{
     const filterFunc = (item) => {

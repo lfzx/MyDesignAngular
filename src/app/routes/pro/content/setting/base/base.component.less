@@ -1,0 +1,55 @@
+@import '~@delon/theme/styles/default';
+
+:host {
+  .main {
+    display: flex;
+    padding-top: 18px;
+  }
+  .left {
+    max-width: 448px;
+    min-width: 310px;
+    padding-left: 120px;
+    flex: 1;
+
+  }
+  .right {
+    padding-top: 20px;
+    .avatar_title {
+      height: 22px;
+      font-size: @font-size-base;
+      color: @heading-color;
+      line-height: 22px;
+      margin-bottom: 8px;
+    }
+    .avatar {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      border-radius: 50%;
+      img {
+        width: 100%;
+      }
+    }
+    .button_view {
+      width: 144px;
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  :host {
+    flex-direction: column-reverse;
+    .right {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 448px;
+      .avatar_title {
+        display: none;
+      }
+    }
+  }
+}

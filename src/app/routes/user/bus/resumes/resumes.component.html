@@ -32,7 +32,16 @@
           <sv label="毕业年份">{{user.graduationTime}}</sv>
           <sv label="学历">{{user.academic}}</sv>
           <sv label="专业">{{user.profession}}</sv>
-          <sv label="工作经验">{{resume.resumeExperience}}</sv>
+          <sv label="工作经验">
+              <nz-mention>
+                  <textarea
+                    nz-input
+                    [nzAutosize]="{minRows: 4, maxRows: 4}"
+                    [(ngModel)]="resume.resumeExperience"
+                    nzMentionTrigger>
+                   </textarea>
+                   </nz-mention>
+          </sv>
           <sv label="技能加分">{{resume.skill}}</sv>
         </sv-container>
 
@@ -94,7 +103,8 @@
           <nz-form-item>
               <nz-form-label [nzSpan]="7"  nzFor="resumeExperience">工作经验</nz-form-label>
               <nz-form-control [nzSpan]="12" nzHasFeedback>
-                <input nz-input type="resumeExperience" formControlName="resumeExperience" id="resumeExperience">
+                  <textarea nz-input id="resumeExperience" formControlName="resumeExperience" [nzAutosize]="{ minRows: 4, maxRows: 10 }"
+                  placeholder="工作经验"></textarea>
               </nz-form-control>
             </nz-form-item>
 

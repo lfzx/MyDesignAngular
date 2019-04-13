@@ -1,0 +1,178 @@
+<nz-spin [nzSpinning]="userLoading">
+
+  <div *ngIf="role == 1">
+    <div class="main" *ngIf="user">
+    <div class="right">
+      <div class="avatar">
+        <img *ngIf="avatarUrl" [src]="avatarUrl">
+        <!--<img src="{{user.avatar}}" alt="Avatar">-->
+      </div>
+      <nz-upload nzAction="/user/avatar" [nzShowUploadList]="false"
+                 [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
+        <button nz-button class="button_view">
+          <i nz-icon type="upload"></i>
+          <span>点击更换头像</span>
+        </button>
+      </nz-upload>
+    </div>
+    <div class="left">
+      <form nz-form nzLayout="vertical" #f="ngForm" (submit)="save()">
+
+        <nz-form-item>
+          <nz-form-label nzFor="name">用户名</nz-form-label>
+          <nz-form-control [nzSpan]="16" nzHasFeedback>
+            <input nz-input [(ngModel)]="user.name" name="name" maxlength="20" placeholder="请输入您的姓名!" required>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+        <nz-form-label nzFor="school">学校</nz-form-label>
+        <nz-form-control [nzSpan]="16" >
+            <input nz-input [(ngModel)]="user.school" name="school" maxlength="20" placeholder="请输入您的学校!" required>
+        </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzFor="email">邮箱</nz-form-label>
+          <nz-form-control [nzSpan]="16" nzHasFeedback>
+            <input nz-input type="email" [(ngModel)]="user.email" name="email" placeholder="请输入您的邮箱!" required>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary" [disabled]="f.invalid">更新基本信息</button>
+          </nz-form-control>
+        </nz-form-item>
+
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+  <div *ngIf="role == 2">
+    <div class="main" *ngIf="user">
+      <div class="right">
+        <div class="avatar">
+          <img *ngIf="avatarUrl" [src]="avatarUrl">
+          <!--<img src="{{user.avatar}}" alt="Avatar">-->
+        </div>
+        <nz-upload nzAction="/user/avatar" [nzShowUploadList]="false"
+                   [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
+          <button nz-button class="button_view">
+            <i nz-icon type="upload"></i>
+            <span>点击更换头像</span>
+          </button>
+        </nz-upload>
+      </div>
+      <div class="left">
+        <form nz-form nzLayout="vertical" #f="ngForm" (submit)="save()">
+  
+          <nz-form-item>
+            <nz-form-label nzFor="name">姓名</nz-form-label>
+            <nz-form-control [nzSpan]="16" nzHasFeedback>
+              <input nz-input [(ngModel)]="user.name" name="name" maxlength="20" placeholder="请输入您的姓名!" required>
+            </nz-form-control>
+          </nz-form-item>
+  
+          <nz-form-item>
+          <nz-form-label nzFor="gender">性别</nz-form-label>
+          <nz-form-control [nzSpan]="16" >
+            <nz-select style="width: 220px;
+  " [(ngModel)]="selectedValue" name="selectedValue" nzAllowClear nzPlaceHolder="Choose" >
+              <nz-option [nzValue]=0 nzLabel="女" ></nz-option>
+              <nz-option [nzValue]=1 nzLabel="男" ></nz-option>
+            </nz-select>
+          </nz-form-control>
+          </nz-form-item>
+  
+          <nz-form-item>
+            <nz-form-label nzFor="email">邮箱</nz-form-label>
+            <nz-form-control [nzSpan]="16" nzHasFeedback>
+              <input nz-input type="email" [(ngModel)]="user.email" name="email" placeholder="请输入您的邮箱!" required>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="primary" [disabled]="f.invalid">更新基本信息</button>
+            </nz-form-control>
+          </nz-form-item>
+  
+        </form>
+  
+      </div>
+  
+    </div>
+  </div>
+  
+  <div *ngIf="role == 3">
+    <div class="main" *ngIf="user">
+      <div class="right">
+        <div class="avatar">
+          <img *ngIf="avatarUrl" [src]="avatarUrl">
+          <!--<img src="{{user.avatar}}" alt="Avatar">-->
+        </div>
+        <nz-upload nzAction="/user/avatar" [nzShowUploadList]="false"
+                   [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
+          <button nz-button class="button_view">
+            <i nz-icon type="upload"></i>
+            <span>点击更换头像</span>
+          </button>
+        </nz-upload>
+      </div>
+      <div class="left">
+        <form nz-form nzLayout="vertical" #f="ngForm" (submit)="save()">
+  
+          <nz-form-item>
+            <nz-form-label nzFor="name">公司名</nz-form-label>
+            <nz-form-control [nzSpan]="16" nzHasFeedback>
+              <input nz-input [(ngModel)]="user.name" name="name" maxlength="20" placeholder="请输入您的姓名!" required>
+            </nz-form-control>
+          </nz-form-item>
+  
+          <nz-form-item>
+          <nz-form-label nzFor="organizationCode">组织机构代码</nz-form-label>
+          <nz-form-control [nzSpan]="16" >
+            <input nz-input [(ngModel)]="user.organizationCode" name="organizationCode" maxlength="9" minlength="9" placeholder="请输入组织机构代码!" required>
+          </nz-form-control>
+          </nz-form-item>
+  
+          <nz-form-item>
+            <nz-form-label nzFor="email">邮箱</nz-form-label>
+            <nz-form-control [nzSpan]="16" nzHasFeedback>
+              <input nz-input type="email" [(ngModel)]="user.email" name="email" placeholder="请输入您的邮箱!" required>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzFor="companyUrl">公司网站链接</nz-form-label>
+            <nz-form-control [nzSpan]="16" nzHasFeedback>
+              <input nz-input [(ngModel)]="user.companyUrl" name="companyUrl" placeholder="请输入公司网站链接!" required>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label nzFor="companyDescription">公司简介</nz-form-label>
+            <nz-form-control [nzSpan]="16" nzHasFeedback>
+                <textarea nz-input [(ngModel)]="user.companyDescription" name="companyDescription" [nzAutosize]="{ minRows: 4, maxRows: 10 }"
+                          placeholder="公司简介"></textarea>
+              </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="primary" [disabled]="f.invalid">更新基本信息</button>
+            </nz-form-control>
+          </nz-form-item>
+  
+        </form>
+  
+      </div>
+  
+    </div>
+  </div>
+  
+</nz-spin>

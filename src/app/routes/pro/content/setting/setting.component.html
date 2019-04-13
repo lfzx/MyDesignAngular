@@ -1,0 +1,16 @@
+
+<div nz-row nzGutter="24" class="py-lg">
+<div nz-col nzMd="24" nzLg="24">
+  <nz-card class="tabsCard" [nzBordered]="false" [nzTitle]="tagTitleTpl">
+    <ng-template #tagTitleTpl>
+      <nz-tabset nzSize="large" [nzSelectedIndex]="pos">
+        <nz-tab *ngFor="let i of menus" [nzTitle]="i.title" (nzClick)="to(i)"></nz-tab>
+      </nz-tabset>
+    </ng-template>
+    <div class="ct">
+    <div class="title">{{title}}</div>
+    <router-outlet></router-outlet>
+    </div>
+  </nz-card>
+</div>
+</div>

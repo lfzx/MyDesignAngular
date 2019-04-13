@@ -1,0 +1,94 @@
+<page-header>
+  </page-header>
+  
+  <nz-card [nzBordered]="false">
+  
+    <form nz-form [nzLayout]="'inline'" (ngSubmit)="searchUseByrName()" class="search__form">
+      <nz-row [nzGutter]="{ md: 8, lg: 24, xl: 48 }">
+  
+        <nz-col nzMd="8" nzSm="24">
+          <nz-form-item>
+            <nz-form-label nzFor="userResponse">回复状态</nz-form-label>
+            <nz-form-control>
+              <input nz-input [(ngModel)]="searchValue" name="userResponse" placeholder="请输入" id="userResponse">
+            </nz-form-control>
+          </nz-form-item>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+          <button nz-button type="submit" [nzType]="'primary'" class="mx-sm" [nzLoading]="loading">
+            <i class="anticon anticon-search"></i><span>查询</span></button>
+  
+          <button nz-button type="reset" (click)="getInterview()" class="mx-sm">
+            <i class="anticon anticon-reload"></i>
+            <span>重置</span></button>
+        </nz-col>
+      </nz-row>
+    </form>
+  
+    <div class="my-md" *ngIf="!disabledButton">
+      <nz-alert [nzType]="'info'" [nzShowIcon]="true" [nzMessage]="message">
+        <ng-template #message>
+          已选择
+          <strong class="text-primary">{{checkedNumber}}</strong> 项&nbsp;&nbsp;
+        </ng-template>
+      </nz-alert>
+    </div>
+    <nz-table [nzSize]="'middle'" #nzTable [nzBordered]="true" nzShowSizeChanger [nzData]="interview" [nzTotal]="total">
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+          <th nzShowCheckbox *ngIf="checkbox" [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate"
+            (nzCheckedChange)="checkAll($event)">
+  
+          <th>简历ID</th>
+          <th>职位ID</th>
+          <th nzShowFilter [nzFilterMultiple]="false" [nzFilters]="filterEnable" (nzFilterChange)="updateFilter($event)">回复状态</th>
+          <th nzShowSort nzSortKey="deliveryUpdateTime">更新时间</th>
+          <th nz-Width="130px">操作
+          </th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+          <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus($event)">
+  
+          <td>{{data.resumeId}}</td>
+          <td>{{data.postId}}</td>
+          <td>
+              <span *ngIf="data.userResponse == 0">
+                <nz-badge nzStatus="default" nzText="暂无回应"></nz-badge>
+              </span>
+              <span *ngIf="data.userResponse == 1">
+                <nz-badge nzStatus="success" nzText="参加"></nz-badge>
+              </span>
+              <span *ngIf="data.userResponse == 2 ">
+                <nz-badge nzStatus="error" nzText="不参加"></nz-badge>
+              </span>
+            </td>
+          <td>{{data.interviewUpdateTime}}</td>
+          <td>
+            <nz-dropdown>
+              <button nz-button nz-dropdown>
+                <i class="anticon anticon-menu-unfold"></i><i class="anticon anticon-down"></i>
+              </button>
+              <ul nz-menu>
+                <li nz-menu-item (click)="openDetail(data)">
+                  <i class="fa fa-pencil"></i> 查看详情
+                </li>
+                <li nz-menu-item>
+                    <nz-popconfirm [nzTitle]="'确定删除?'" (nzOnConfirm)="delete(data)">
+                  <span nz-popconfirm>
+                    <i class="fa fa-trash-o"></i> 删除
+                  </span>
+                    </nz-popconfirm>
+                  </li>
+              </ul>
+            </nz-dropdown>
+  
+          </td>
+        </tr>
+      </tbody>
+  
+    </nz-table>
+  
+  </nz-card>

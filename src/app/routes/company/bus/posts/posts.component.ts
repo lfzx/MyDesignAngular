@@ -15,7 +15,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CompanyBusPostsComponent implements OnInit {
 
   isShow = false;
-  post: Post;
 
   rawData: any[];
   posts: any[] = [];
@@ -48,7 +47,6 @@ export class CompanyBusPostsComponent implements OnInit {
 
      // 从查询参数里面去取改为从URL中去取，将原来的queryparams改为params
     ngOnInit() {
-      this.post = new Post();
       if (localStorage.getItem('uid').length != 0) {
         this.isShow = true;
         this.getPost(localStorage.getItem('uid'));

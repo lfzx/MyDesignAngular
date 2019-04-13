@@ -14,8 +14,6 @@ import { UserRegisterComponent } from './passport/register/register.component';
 // single pages
 import { CallbackComponent } from './callback/callback.component';
 import { UserLockComponent } from './passport/lock/lock.component';
-import { BaseComponent } from './base/base.component';
-import { SchoolComponent } from './school/school.component';
 import { AdminLoginComponent } from './passport/admin-login/admin-login.component';
 
 const routes: Routes = [
@@ -30,8 +28,7 @@ const routes: Routes = [
       { path: '', loadChildren: './user/user.module#UserModule' },
       { path: '', loadChildren: './company/company.module#CompanyModule' },
       { path: '', loadChildren: './admin/admin.module#AdminModule' },
-      {path: 'base', component: BaseComponent},
-      {path: 'school', component: SchoolComponent},
+      { path: '', loadChildren: './pro/pro.module#ProModule' },
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
     ]
