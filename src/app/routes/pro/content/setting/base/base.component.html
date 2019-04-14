@@ -16,7 +16,7 @@
       </nz-upload>
     </div>
     <div class="left">
-      <form nz-form nzLayout="vertical" #f="ngForm" (submit)="save()">
+      <form nz-form nzLayout="vertical" #f="ngForm" (submit)="saveAdmin()">
 
         <nz-form-item>
           <nz-form-label nzFor="name">用户名</nz-form-label>
@@ -68,7 +68,7 @@
         </nz-upload>
       </div>
       <div class="left">
-        <form nz-form nzLayout="vertical" #f="ngForm" (submit)="save()">
+        <form nz-form nzLayout="vertical" #f="ngForm" (submit)="saveUser()">
   
           <nz-form-item>
             <nz-form-label nzFor="name">姓名</nz-form-label>
@@ -124,7 +124,7 @@
         </nz-upload>
       </div>
       <div class="left">
-        <form nz-form nzLayout="vertical" #f="ngForm" (submit)="save()">
+        <form nz-form nzLayout="vertical" #f="ngForm" (submit)="saveCompany()">
   
           <nz-form-item>
             <nz-form-label nzFor="name">公司名</nz-form-label>

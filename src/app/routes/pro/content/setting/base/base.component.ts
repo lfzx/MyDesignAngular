@@ -54,7 +54,6 @@ export class BaseComponent implements OnInit {
       this.settings.setUser(item.list);
       this.user = this.settings.user;
       this.avatarUrl = this.settings.user.avatar;
-      console.log(this.user);
     this.userLoading = false;
     this.cdr.detectChanges();
     });
@@ -66,7 +65,6 @@ export class BaseComponent implements OnInit {
       this.settings.setUser(item.list);
       this.user = this.settings.user;
       this.avatarUrl = this.settings.user.avatar;
-      console.log(this.user);
     this.userLoading = false;
     this.cdr.detectChanges();
   });
@@ -78,17 +76,52 @@ getAdmin(){
     this.settings.setUser(data.list);
     this.user = this.settings.user;
     this.avatarUrl = this.settings.user.avatar;
-    console.log(this.user);
     this.userLoading = false;
     this.cdr.detectChanges();
 });
 }
 
 
-  save() {
+  saveAdmin() {
     console.log(this.user);
-    this.msg.success(JSON.stringify(this.user));
-    return false;
+    this.http.put(`passpost/administrator/${localStorage.getItem('uid')}`, this.user)
+    .subscribe((item: any) => {
+      if (item.msg === 'ok') {
+        this.msg.success('编辑成功！' + item.msg);
+        this.getAdmin();
+      } else{
+      this.msg.error('编辑失败!' + '/br' + item.msg);
+      this.getAdmin();
+    }
+    });
+  }
+
+  saveUser() {
+    console.log(this.user);
+    this.http.put(`passpost/${localStorage.getItem('uid')}`, this.user)
+    .subscribe((item: any) => {
+      if (item.msg === 'ok') {
+        this.msg.success('编辑成功！' + item.msg);
+        this.getAdmin();
+      } else{
+      this.msg.error('编辑失败!' + '/br' + item.msg);
+      this.getAdmin();
+    }
+    });
+  }
+
+  saveCompany() {
+    console.log(this.user);
+    this.http.put(`passport/company/${localStorage.getItem('uid')}`, this.user)
+    .subscribe((item: any) => {
+      if (item.msg === 'ok') {
+        this.msg.success('编辑成功！' + item.msg);
+        this.getAdmin();
+      } else{
+      this.msg.error('编辑失败!' + '/br' + item.msg);
+      this.getAdmin();
+    }
+    });
   }
 
   beforeUpload = (file: File) => {
